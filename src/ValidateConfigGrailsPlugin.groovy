@@ -10,8 +10,8 @@ class ValidateConfigGrailsPlugin {
 
     // TODO Fill in these fields
     def title = "Validate Config Plugin" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
+    def author = "Andy Miller"
+    def authorEmail = "onetribeyoyo@gmail.com"
     def description = '''\
 Brief summary/description of the plugin.
 '''
