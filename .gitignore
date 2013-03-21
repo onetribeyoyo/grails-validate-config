@@ -1,0 +1,31 @@
+# build artifacts...
+target/
+
+# cobertura files...
+*.ser
+
+# logs...
+logs/
+*.log
+
+# eclipse project files and build artifacts...
+.classpath
+.project
+.settings
+.springBeans
+src/.link_to_grails_plugins/
+src/target-eclipse/
+
+# intellij project files and build artifacts...
+.idea
+*.iml
+*.ipr
+*.iws
+out/
+
+# osx turds...
+.DS_Store
+
+# misc...
+.vagrant
+*.box
