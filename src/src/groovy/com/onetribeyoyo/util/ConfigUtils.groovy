@@ -1,13 +1,10 @@
 package com.onetribeyoyo.util
 
-import org.codehaus.groovy.grails.web.context.ServletContextHolder
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
-
 /**
  *  Config.groovy can include something like
  *  validateConfig  {
  *      required = [ "a", "b", "c" ]
- *      expected = [ p:123, d:"foobar", q:"/dev/null" ]
+ *      expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
  *  }
  */
 class ConfigUtils {
@@ -15,7 +12,7 @@ class ConfigUtils {
     // NOTE: Logging is not yet configured when called from Config.groovy, so don't use the logger in these methods.
 
     /** call this from Config.groovy, passing grails.config.locations as an argument. */
-    static void validateExternalFiles(def locations, params = [failWhenMissing: false]) {
+    static void validateExternalFiles(def locations) {
 
         def missingLocations = []
         locations?.each { location ->
@@ -35,33 +32,26 @@ class ConfigUtils {
             }
         }
         if (missingLocations) {
-            def message = "ERROR: validateLocations: Cannot locate external configuration file${missingLocations.size() > 1 ? 's' : ''}: ${missingLocations}."
-            println "ERROR:"
-            println message
-            println "ERROR:"
-            if (params.failWhenMissing) {
-                throw new RuntimeException(message)
-            }
+            throw new RuntimeException("ERROR: validateLocations: Cannot locate external configuration file${missingLocations.size() > 1 ? 's' : ''}: ${missingLocations}.")
         }
     }
 
     /** Call this from Bootstrap.groovy... */
-    static void validateProperties() {
-        def grailsConfig = ServletContextHolder.servletContext.getAttribute(GrailsApplicationAttributes.APPLICATION_CONTEXT).grailsApplication.config
+    static void validateProperties(def grailsConfig) {
         validateRequiredProperties(grailsConfig)
         validateExpectedProperties(grailsConfig)
     }
 
     static void validateRequiredProperties(def grailsConfig) {
-        boolean missingRequiredProperties = false
+        def missingValues = []
         grailsConfig.validateConfig.required?.each { propertyName ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
                 println "ERROR: validateProperties: No value specified for required config property \"${propertyName}\".".toString()
-                missingRequiredProperties = true
+                missingValues << propertyName
             }
         }
-        if (missingRequiredProperties) {
-            throw new RuntimeException("ERROR: validateRequiredProperties(): Values must be provided for all validateConfig.required properties.")
+        if (missingValues) {
+            throw new RuntimeException("ERROR: validateRequiredProperties(): Values must be provided for required properties: ${missingValues}.")
         }
     }
 
@@ -70,7 +60,7 @@ class ConfigUtils {
             if (propertyValue(grailsConfig, propertyName) == [:]) {
                 println "WARN: validateProperties: No value specified for expected config property \"${propertyName}\".  Using default: ${defaultValue}".toString()
                 setPropertyValue(grailsConfig, propertyName, defaultValue)
-                assert propertyValue(grailsConfig, propertyName) == defaultValue
+                //assert propertyValue(grailsConfig, propertyName) == defaultValue
             }
         }
     }
