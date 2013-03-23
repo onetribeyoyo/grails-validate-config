@@ -57,10 +57,6 @@ Brief summary/description of the plugin.
         ConfigObject.metaClass.validateExpectedProperties = { ->
             ConfigUtils.validateExpectedProperties(delegate)
         }
-        ConfigObject.metaClass.validateConfig = { ->
-            ConfigObject.validateRequiredProperties()
-            ConfigObject.validateExpectedProperties()
-        }
 
         //Config.metaClass.static.validateExternalFiles = { ->
         //    org.onetribeyoyo.util.ConfigUtils.validateExternalFiles(grails?.config?.locations)
