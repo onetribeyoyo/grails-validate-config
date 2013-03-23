@@ -1,0 +1,18 @@
+<plugin name='validate-config' version='0.1' grailsVersion='2.2 &gt; *'>
+  <author>Andy Miller</author>
+  <authorEmail>onetribeyoyo@gmail.com</authorEmail>
+  <title>Validate Config Plugin</title>
+  <description>
+Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/validate-config</documentation>
+  <type>ValidateConfigGrailsPlugin</type>
+  <resources />
+  <repositories>
+    <repository name='grailsCentral' url='http://grails.org/plugins' />
+  </repositories>
+  <dependencies />
+  <plugins />
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>
