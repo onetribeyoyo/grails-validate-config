@@ -8,7 +8,7 @@ class ValidateConfigGrailsPlugin {
     def author = "Andy Miller"
     def authorEmail = "onetribeyoyo@gmail.com"
     def description = '''\
-Adds methods to ConfigObject for validating expected and required properties.
+Adds methods to ConfigObject for validating expected and required properties.  This is especially useful when the config has been externalized.
 
 To use it simply add something like this to Config.groovy
 validate  {
@@ -16,8 +16,15 @@ validate  {
     expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
 }
 
-Then, ussually in BootStrap, calling grailsApplication.config.validateExpectedProperties() will set defaults for missing expected properties.
-and calling grailsApplication.config.validateRequiredProperties() will throw ConfigurationException for missing required properties.
+Then, usually in BootStrap, calling
+
+    grailsApplication.config.validateExpectedProperties()
+
+will set defaults for missing expected properties. and calling
+
+    grailsApplication.config.validateRequiredProperties()
+
+will throw ConfigurationException for missing required properties.
 
 See the sample app at https://github.com/onetribeyoyo/validate-config/tree/master/example .
 '''
