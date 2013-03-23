@@ -19,7 +19,16 @@ class ValidateConfigGrailsPlugin {
     def author = "Andy Miller"
     def authorEmail = "onetribeyoyo@gmail.com"
     def description = '''
-Brief summary/description of the plugin.
+Adds methods to ConfigObject for validating expected and required properties.
+
+To use it simply add something like this to Config.groovy
+validate  {
+    required = [ "a", "b", "c" ]
+    expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
+}
+
+Then, ussually in BootStrap, calling grailsApplication.config.validateExpectedProperties() will set defaults for missing expected properties.
+and calling grailsApplication.config.validateRequiredProperties() will throw ConfigurationException for missing required properties.
 '''
 
     // URL to the plugin's documentation
