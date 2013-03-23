@@ -29,6 +29,8 @@ validate  {
 
 Then, ussually in BootStrap, calling grailsApplication.config.validateExpectedProperties() will set defaults for missing expected properties.
 and calling grailsApplication.config.validateRequiredProperties() will throw ConfigurationException for missing required properties.
+
+See the sample app at https://github.com/onetribeyoyo/validate-config/tree/master/example .
 '''
 
     // URL to the plugin's documentation
