@@ -1,8 +1,11 @@
 package com.onetribeyoyo.util
 
+import groovy.util.ConfigObject
+import org.codehaus.groovy.control.ConfigurationException
+
 /**
  *  Config.groovy can include something like
- *  validateConfig  {
+ *  validate  {
  *      required = [ "a", "b", "c" ]
  *      expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
  *  }
@@ -27,51 +30,43 @@ class ConfigUtils {
                 break
 
             default:
-                println "ERROR: validateLocations: unknonw location type: \"${locationType}\".  Expected \"classpath\" or \"file\"."
                 missingLocations << location
             }
         }
         if (missingLocations) {
-            throw new RuntimeException("ERROR: validateLocations: Cannot locate external configuration file${missingLocations.size() > 1 ? 's' : ''}: ${missingLocations}.")
+            throw new ConfigurationException("Cannot locate external configuration file${missingLocations.size() > 1 ? 's' : ''}: ${missingLocations}.")
         }
     }
 
-    /** Call this from Bootstrap.groovy... */
-    static void validateProperties(def grailsConfig) {
-        validateRequiredProperties(grailsConfig)
-        validateExpectedProperties(grailsConfig)
-    }
-
-    static void validateRequiredProperties(def grailsConfig) {
+    static void validateRequiredProperties(ConfigObject grailsConfig) {
         def missingValues = []
-        grailsConfig.validateConfig.required?.each { propertyName ->
+        grailsConfig.validate.required?.each { propertyName ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
-                println "ERROR: validateProperties: No value specified for required config property \"${propertyName}\".".toString()
+                println "ERROR: validateRequiredProperties: No value specified for required config property \"${propertyName}\"."
                 missingValues << propertyName
             }
         }
         if (missingValues) {
-            throw new RuntimeException("ERROR: validateRequiredProperties(): Values must be provided for required properties: ${missingValues}.")
+            throw new ConfigurationException("Values must be provided for required properties: ${missingValues}.")
         }
     }
 
-    static void validateExpectedProperties(def grailsConfig) {
-        grailsConfig.validateConfig.expected?.each { propertyName, defaultValue ->
+    static void validateExpectedProperties(ConfigObject grailsConfig) {
+        grailsConfig.validate.expected?.each { propertyName, defaultValue ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
-                println "WARN: validateProperties: No value specified for expected config property \"${propertyName}\".  Using default: ${defaultValue}".toString()
+                println "WARN: validateExpectedProperties: No value specified for expected config property \"${propertyName}\".  Using default: ${defaultValue}"
                 setPropertyValue(grailsConfig, propertyName, defaultValue)
-                //assert propertyValue(grailsConfig, propertyName) == defaultValue
             }
         }
     }
 
-    private static def propertyValue(def grailsConfig, String propertyName) {
+    private static def propertyValue(ConfigObject grailsConfig, String propertyName) {
         propertyName.tokenize(".").inject(grailsConfig) { config, token ->
             (config instanceof Map) ? (config[token] ?: [:]) : [:]
         }
     }
 
-    private static void setPropertyValue(def grailsConfig, String propertyName, def value) {
+    private static void setPropertyValue(ConfigObject grailsConfig, String propertyName, def value) {
         def tokens = propertyName.tokenize(".")
         if (tokens.size() == 1) {
             grailsConfig[propertyName] = value
