@@ -1,6 +1,5 @@
 package com.onetribeyoyo.util
 
-import groovy.util.ConfigObject
 import org.codehaus.groovy.control.ConfigurationException
 
 class ConfigUtilsTest extends GroovyTestCase {
@@ -14,6 +13,7 @@ class ConfigUtilsTest extends GroovyTestCase {
         ConfigUtils.validateExpectedProperties(config)
         assert config.foo == "defaultValue"
     }
+
     @Test
     void expected_topLevelProperty_found() {
         def config = new ConfigObject()
@@ -34,6 +34,7 @@ class ConfigUtilsTest extends GroovyTestCase {
         ConfigUtils.validateExpectedProperties(config)
         assert config.foo.bar == "defaultValue"
     }
+
     @Test
     void expected_secondLevelProperty_found() {
         def config = new ConfigObject()
@@ -54,6 +55,7 @@ class ConfigUtilsTest extends GroovyTestCase {
         ConfigUtils.validateExpectedProperties(config)
         assert config.foo.bar.baz == "defaultValue"
     }
+
     @Test
     void expected_deepProperty_found() {
         def config = new ConfigObject()
@@ -84,6 +86,7 @@ class ConfigUtilsTest extends GroovyTestCase {
         ConfigUtils.validateExpectedProperties(config)
         assert config.foo == false
     }
+
     @Test
     void expected_property_with_true_default() {
         def config = new ConfigObject()
@@ -107,6 +110,7 @@ class ConfigUtilsTest extends GroovyTestCase {
             assert ex.message == "Values must be provided for required properties: [foo]."
         }
     }
+
     @Test
     void requiredFound() {
         def config = new ConfigObject()
@@ -121,8 +125,6 @@ class ConfigUtilsTest extends GroovyTestCase {
         }
     }
 
-
-
     @Test
     void expect_several_none_found() {
         def config = new ConfigObject()
@@ -136,6 +138,7 @@ class ConfigUtilsTest extends GroovyTestCase {
         assert config.bar == "defaultValue2"
         assert config.baz == "defaultValue3"
     }
+
     @Test
     void expect_several_all_found() {
         def config = new ConfigObject()
@@ -152,6 +155,7 @@ class ConfigUtilsTest extends GroovyTestCase {
         assert config.bar == "defined2"
         assert config.baz == "defined3"
     }
+
     @Test
     void expect_several_some_found() {
         def config = new ConfigObject()
@@ -183,6 +187,7 @@ class ConfigUtilsTest extends GroovyTestCase {
             assert ex.message == "Values must be provided for required properties: [foo, bar, baz]."
         }
     }
+
     @Test
     void require_several_all_found() {
         def config = new ConfigObject()
@@ -200,6 +205,7 @@ class ConfigUtilsTest extends GroovyTestCase {
             fail()
         }
     }
+
     @Test
     void require_several_some_found() {
         def config = new ConfigObject()
@@ -217,5 +223,4 @@ class ConfigUtilsTest extends GroovyTestCase {
             assert ex.message == "Values must be provided for required properties: [bar]."
         }
     }
-
 }
