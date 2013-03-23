@@ -1,6 +1,5 @@
 package com.onetribeyoyo.util
 
-import groovy.util.ConfigObject
 import org.codehaus.groovy.control.ConfigurationException
 
 /**
@@ -15,10 +14,10 @@ class ConfigUtils {
     // NOTE: Logging is not yet configured when called from Config.groovy, so don't use the logger in these methods.
 
     /** call this from Config.groovy, passing grails.config.locations as an argument. */
-    static void validateExternalFiles(def locations) {
+    static void validateExternalFiles(locations) {
 
         def missingLocations = []
-        locations?.each { location ->
+        locations.each { location ->
             def locationType = location.tokenize(":")[0]
             switch(locationType) {
             case "classpath":
@@ -40,9 +39,9 @@ class ConfigUtils {
 
     static void validateRequiredProperties(ConfigObject grailsConfig) {
         def missingValues = []
-        grailsConfig.validate.required?.each { propertyName ->
+        grailsConfig.validate.required.each { propertyName ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
-                println "ERROR: validateRequiredProperties: No value specified for required config property \"${propertyName}\"."
+                println """ERROR: validateRequiredProperties: No value specified for required config property "${propertyName}"."""
                 missingValues << propertyName
             }
         }
@@ -52,21 +51,21 @@ class ConfigUtils {
     }
 
     static void validateExpectedProperties(ConfigObject grailsConfig) {
-        grailsConfig.validate.expected?.each { propertyName, defaultValue ->
+        grailsConfig.validate.expected.each { propertyName, defaultValue ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
-                println "WARN: validateExpectedProperties: No value specified for expected config property \"${propertyName}\".  Using default: ${defaultValue}"
+                println """WARN: validateExpectedProperties: No value specified for expected config property "${propertyName}".  Using default: ${defaultValue}"""
                 setPropertyValue(grailsConfig, propertyName, defaultValue)
             }
         }
     }
 
-    private static def propertyValue(ConfigObject grailsConfig, String propertyName) {
+    private static propertyValue(ConfigObject grailsConfig, String propertyName) {
         propertyName.tokenize(".").inject(grailsConfig) { config, token ->
             (config instanceof Map) ? (config[token] ?: [:]) : [:]
         }
     }
 
-    private static void setPropertyValue(ConfigObject grailsConfig, String propertyName, def value) {
+    private static void setPropertyValue(ConfigObject grailsConfig, String propertyName, value) {
         def tokens = propertyName.tokenize(".")
         if (tokens.size() == 1) {
             grailsConfig[propertyName] = value
@@ -77,5 +76,4 @@ class ConfigUtils {
             }[end] = value
         }
     }
-
 }
