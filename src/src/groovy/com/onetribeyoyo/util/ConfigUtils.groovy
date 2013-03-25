@@ -14,7 +14,7 @@ class ConfigUtils {
     // NOTE: Logging is not yet configured when called from Config.groovy, so don't use the logger in these methods.
 
     /** call this from Config.groovy, passing grails.config.locations as an argument. */
-    static void validateExternalFiles(locations) {
+    static void validateExternalFiles(def locations) {
 
         def missingLocations = []
         locations.each { location ->

@@ -1,3 +1,5 @@
+import com.onetribeyoyo.util.ConfigUtils
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -10,6 +12,23 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+
+
+grails.config.locations << "file:${userHome}/.emacs",
+grails.config.locations << "file:${userHome}/.grails/${appName}-config.groovy"
+
+ConfigUtils.validateExternalFiles(grails.config.locations)
+
+
+validate  {
+    required = [ "a", "b", "c" ]
+    expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
+}
+
+c = "defined"
+d = "http://foo.com/if/woody/had/gone/straight/to/the/police/none/of/this/every/would/have/happened"
+b = "O, I c d b!"
+
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
@@ -89,12 +108,3 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-
-validate  {
-    required = [ "a", "b", "c" ]
-    expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
-}
-
-c = "defined"
-d = "http://foo.com/if/woody/had/gone/straight/to/the/police/none/of/this/every/would/have/happened"
-b = "O, I c d b!"

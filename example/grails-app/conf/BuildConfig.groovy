@@ -60,6 +60,6 @@ grails.project.dependency.resolution = {
 
         compile ':cache:1.0.1'
 
-        compile ':validate-config:0.3'
+        compile ':validate-config:0.4'
     }
 }
