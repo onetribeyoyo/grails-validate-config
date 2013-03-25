@@ -6,6 +6,7 @@ properties.  This is especially useful when the config has been
 externalized and you want to ensure values are provided for all the
 required/expected properties.
 
+
 Validating Expected and Required Properties
 -------------------------------------------
 
@@ -54,8 +55,8 @@ This way you can validate portions of the config by calling
 and so on.
 
 
-Validating that External Files Exist
-------------------------------------
+Validating Existence of External Files
+--------------------------------------
 
 The `ConfigUtils.validateExternalFiles` method will check that a list of
 files does exist.  Use it like this in `Config.groovy`.
