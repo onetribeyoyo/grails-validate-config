@@ -29,6 +29,30 @@ grailsApplication.config.validateRequiredProperties()
 A `ConfigurationException` will be thrown when required properties are
 missing.
 
+The `validate.expected` and `validate.required` data can be specified at
+lower levels too...
+
+    grails {
+        mongo {
+            validate {
+                required = [
+                    "grails.mongo.host",
+                    "grails.mongo.databaseName"
+                ]
+                expected = [
+                    "grails.mongo.port": 27017,
+                    "grails.mongo.bucket": "project"
+                ]
+            }
+        }
+    }
+
+This way you can validate portions of the config by calling
+
+    grailsApplication.config.grails.mongo.validateExpectedProperties()
+
+and so on.
+
 
 Validating that External Files Exist
 ------------------------------------
