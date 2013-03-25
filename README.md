@@ -9,7 +9,7 @@ required/expected properties.
 Validating Expected and Required Properties
 -------------------------------------------
 
-To use it simply add something like this to `Config.groovy`
+Simply add something like this to `Config.groovy`
 
     validate  {
         required = [ "a", "b", "c" ]
@@ -36,7 +36,7 @@ Validating that External Files Exist
 The `ConfigUtils.validateExternalFiles` method will check that a list of
 files does exist.  Use it like this in `Config.groovy`.
 
-    grails.config.locations << "file:${userHome}/.emacs",
+    grails.config.locations << "file:${userHome}/.emacs"
     grails.config.locations << "file:${userHome}/.grails/${appName}-config.groovy"
 
     ConfigUtils.validateExternalFiles(grails.config.locations)

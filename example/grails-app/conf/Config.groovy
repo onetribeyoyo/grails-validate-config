@@ -14,7 +14,7 @@ import com.onetribeyoyo.util.ConfigUtils
 // }
 
 
-grails.config.locations << "file:${userHome}/.emacs",
+grails.config.locations << "file:${userHome}/.emacs"
 grails.config.locations << "file:${userHome}/.grails/${appName}-config.groovy"
 
 ConfigUtils.validateExternalFiles(grails.config.locations)
