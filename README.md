@@ -6,7 +6,7 @@ properties.  This is especially useful when the config has been
 externalized and you want to ensure values are provided for all the
 required/expected properties.
 
-Validating Expected and Requried Properties
+Validating Expected and Required Properties
 -------------------------------------------
 
 To use it simply add something like this to `Config.groovy`
