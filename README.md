@@ -73,4 +73,4 @@ exist.
 Example
 -------
 
-See the sample app at https://github.com/onetribeyoyo/validate-config/tree/master/example .
+See the sample apps for various grails versions at https://github.com/onetribeyoyo/validate-config/tree/master/examples .
