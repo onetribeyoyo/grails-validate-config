@@ -48,6 +48,6 @@ grails.project.dependency.resolution = {
 
         build ":tomcat:$grailsVersion"
 
-        compile ':validate-config:0.4'
+        compile ':validate-config:0.4.1'
     }
 }

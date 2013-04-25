@@ -37,9 +37,9 @@ class ConfigUtils {
         }
     }
 
-    static void validateRequiredProperties(ConfigObject grailsConfig) {
+    static void validateRequiredProperties(def grailsConfig) {
         def missingValues = []
-        grailsConfig.validate.required.each { propertyName ->
+        grailsConfig.validate?.required?.each { propertyName ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
                 println """ERROR: validateRequiredProperties: No value specified for required config property "${propertyName}"."""
                 missingValues << propertyName
@@ -50,8 +50,8 @@ class ConfigUtils {
         }
     }
 
-    static void validateExpectedProperties(ConfigObject grailsConfig) {
-        grailsConfig.validate.expected.each { propertyName, defaultValue ->
+    static void validateExpectedProperties(def grailsConfig) {
+        grailsConfig.validate?.expected?.each { propertyName, defaultValue ->
             if (propertyValue(grailsConfig, propertyName) == [:]) {
                 println """WARN: validateExpectedProperties: No value specified for expected config property "${propertyName}".  Using default: ${defaultValue}"""
                 setPropertyValue(grailsConfig, propertyName, defaultValue)
@@ -59,13 +59,13 @@ class ConfigUtils {
         }
     }
 
-    private static propertyValue(ConfigObject grailsConfig, String propertyName) {
+    private static propertyValue(def grailsConfig, String propertyName) {
         propertyName.tokenize(".").inject(grailsConfig) { config, token ->
             (config instanceof Map) ? (config[token] ?: [:]) : [:]
         }
     }
 
-    private static void setPropertyValue(ConfigObject grailsConfig, String propertyName, value) {
+    private static void setPropertyValue(def grailsConfig, String propertyName, value) {
         def tokens = propertyName.tokenize(".")
         if (tokens.size() == 1) {
             grailsConfig[propertyName] = value

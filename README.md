@@ -73,4 +73,18 @@ exist.
 Example
 -------
 
-See the sample apps for various grails versions at https://github.com/onetribeyoyo/validate-config/tree/master/examples .
+See the sample apps for various grails versions at
+https://github.com/onetribeyoyo/validate-config/tree/master/examples .
+
+
+Changes
+-------
+
+### 0.4.1 ###
+
+Relaxing ConfigUtil method signatures: No longer requiring a
+`ConfigObject`, now anything like a map is OK.
+
+### 0.4 ###
+
+Initial release.
