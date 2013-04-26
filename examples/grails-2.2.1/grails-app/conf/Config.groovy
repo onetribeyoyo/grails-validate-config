@@ -16,7 +16,7 @@ import com.onetribeyoyo.util.ConfigUtils
 
 grails.config.locations = []
 grails.config.locations << "file:${userHome}/.emacs"
-grails.config.locations << "file:${userHome}/.grails/${appName}-config.groovy"
+//grails.config.locations << "file:${userHome}/.grails/${appName}-config.groovy"
 
 ConfigUtils.validateExternalFiles(grails.config.locations)
 
@@ -26,6 +26,7 @@ validate  {
     expected = [ "p":123, "d":"foobar", "q":"/dev/null" ]
 }
 
+a = 1
 c = "defined"
 d = "http://foo.com/if/woody/had/gone/straight/to/the/police/none/of/this/every/would/have/happened"
 b = "O, I c d b!"
@@ -35,8 +36,8 @@ grails {
     mongo {
         validate {
             required = [
-                "grails.mongo.host",
-                "grails.mongo.databaseName"
+                //"grails.mongo.host",
+                //"grails.mongo.databaseName"
             ]
             expected = [
                 "grails.mongo.port": 27017,
