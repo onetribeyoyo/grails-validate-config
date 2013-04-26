@@ -2,7 +2,7 @@ import com.onetribeyoyo.util.ConfigUtils
 
 class ValidateConfigGrailsPlugin {
 
-    def version = "0.4.1"
+    def version = "0.4.2"
     def grailsVersion = "2.0 > *"
     def title = "Validate Config Plugin"
     def author = "Andy Miller"
