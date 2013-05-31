@@ -159,7 +159,7 @@ class ConfigUtilsTest extends GroovyTestCase {
     @Test
     void expect_several_some_found() {
         def config = new ConfigObject()
-        config.validate.expected = ["foo":"defaultValue1", "bar":"defaultValue2", "baz":"defaultValue3"]
+        config.validate.expected = ["foo":"defaultValue1", "bar":"defaultValue2", "baz":"defaultValue3", "a.b":"defaultValue4", "one.two.three":"defaultValue5"]
         config.foo = "defined1"
         config.baz = "defined3"
 
@@ -170,6 +170,8 @@ class ConfigUtilsTest extends GroovyTestCase {
         assert config.foo == "defined1"
         assert config.bar == "defaultValue2"
         assert config.baz == "defined3"
+        assert config.a.b == "defaultValue4"
+        assert config.one.two.three == "defaultValue5"
     }
 
     @Test

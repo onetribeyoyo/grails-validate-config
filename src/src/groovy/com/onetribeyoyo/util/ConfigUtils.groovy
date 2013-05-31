@@ -66,14 +66,15 @@ class ConfigUtils {
     }
 
     private static void setPropertyValue(def grailsConfig, String propertyName, value) {
+
+        println "setPropertyValue(.., \"${propertyName}\", ${value})"
+
         def tokens = propertyName.tokenize(".")
         if (tokens.size() == 1) {
             grailsConfig[propertyName] = value
         } else {
-            def end = tokens[-1]
-            tokens[0..-2].inject(grailsConfig) { config, token ->
-                (config instanceof Map) ? (config[token] ?: [:]) : [:]
-            }[end] = value
+            setPropertyValue(grailsConfig[tokens[0]], propertyName.substring(tokens[0].length() + 1), value)
         }
     }
+
 }

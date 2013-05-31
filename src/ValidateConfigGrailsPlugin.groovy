@@ -4,7 +4,7 @@ import org.codehaus.groovy.grails.commons.GrailsApplication
 
 class ValidateConfigGrailsPlugin {
 
-    def version = "0.4.2"
+    def version = "0.4.3"
     def grailsVersion = "2.0 > *"
     def title = "Validate Config Plugin"
     def author = "Andy Miller"

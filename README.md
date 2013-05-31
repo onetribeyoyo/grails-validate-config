@@ -80,6 +80,10 @@ https://github.com/onetribeyoyo/validate-config/tree/master/examples .
 Changes
 -------
 
+### 0.4.3 ###
+
+Fixes a bug with assigning default values for expected properties.
+
 ### 0.4.1 ###
 
 Relaxing ConfigUtil method signatures: No longer requiring a
